@@ -1,10 +1,21 @@
 import Display from "./Display";
+import ListGroup from "./components/ListGroup";
 
-function App() {
-  return <div><Display></Display></div>
+let items = [];
+
+for (let i = 0; i < 5; i++) {
+	items.push(`메뉴 ${i}`);
 }
 
-export default App
+function App() {
+	return (
+		<div>
+			<ListGroup items={items} heading="급식표" />
+		</div>
+	);
+}
+
+export default App;
 
 // import { useState } from 'react'
 // import reactLogo from './assets/react.svg'
@@ -39,4 +50,3 @@ export default App
 //     </>
 //   )
 // }
-
