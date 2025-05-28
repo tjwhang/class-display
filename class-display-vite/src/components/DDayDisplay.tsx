@@ -25,7 +25,7 @@ function DDayDisplay() {
   if (exam) {
     dcounter = `D - ${getDDay(exam.date)}`;
   } else {
-    dcounter = "D - -1";
+    dcounter = "0";
   }
 
   const eventText = <p className="event-text">{eventString}</p>;
