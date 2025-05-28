@@ -1,8 +1,8 @@
-/* #root {
+#root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .logo {
@@ -16,6 +16,20 @@
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+h1 {
+  font-size: 3.2em;
+  font-family: "Noto Sans KR";
+  font-weight: 900;
+  color: #213547;
+  line-height: 1.1;
+  
+  margin-bottom: 0.5em;
+}
+
+ul {
+  width: 20em;
 }
 
 @keyframes logo-spin {
@@ -35,8 +49,43 @@
 
 .card {
   padding: 2em;
+  font-size: 1.2em;
+  position: absolute;
+  border-radius: 1em;
+  box-shadow: 0 3px 10px #404048;
+}
+
+.card-transparent {
+  padding: 2em;
+  font-size: 1.2em;
+  position: absolute;
+  
+}
+
+.food-div{
+  font-size: 2em;
+  left: 0.8em;
+  bottom: 1em;
+}
+
+.d-counter-div{
+  right: 0.3em;
+  top: 0.3em;
+  text-shadow: 1px 1px 50px #4b4a55;
 }
 
 .read-the-docs {
-  color: #888;
-} */
+  color: #4a4a4a;
+}
+
+.event-text {
+  margin-bottom: 0em;
+}
+
+.d-counter {
+  margin-top: 0em;
+  color: #2e2e2e;
+  font-size: 3em;
+  font-weight: 700;
+}
+
