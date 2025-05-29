@@ -9,20 +9,15 @@ interface Props {
 function ListGroup(props: Props) {
   //   const [selecedIndex, setSelectedIndex] = useState(-1);
 
-  const noItemMessage = props.items.length == 0 && <p>No items found.</p>;
+  const noItemMessage = props.items.length == 0 && <p>항목이 없습니다.</p>;
   const list = (
     <>
       <h1>{props.heading}</h1>
       {noItemMessage}
-      <ul className="list-group">
+      <ul className="list-ul">
         {props.items.map((item, index) => (
           <li
-            className={
-              //   selecedIndex == index
-              //     ? "list-group-item active"
-              //     : "list-group-item"
-              "list-group-item"
-            }
+            className={"list-item"}
             key={item}
             // onClick={() => {
             //   setSelectedIndex(index);

@@ -1,4 +1,4 @@
-import { useNextExam } from "../hooks/useNextExam";
+import { useNextEvent } from "../hooks/useNextEvent";
 
 function getDDay(targetDate: string) {
   const today = new Date();
@@ -6,32 +6,41 @@ function getDDay(targetDate: string) {
   const diff = Math.ceil(
     (examDate.getTime() - today.setHours(0, 0, 0, 0)) / (1000 * 60 * 60 * 24)
   );
-  return diff;
+  return diff - 1;
 }
 
 function DDayDisplay() {
-  const exam = useNextExam();
+  const exam = useNextEvent();
 
-  if (!exam) return <p>예정된 고사가 없습니다.</p>;
+  const dateObj = new Date();
+  const dateString = `${dateObj.getFullYear()}년 ${
+    dateObj.getMonth() + 1
+  }월 ${dateObj.getDate()}일`;
+  const dateText = <p className="event-text">{dateString}</p>;
 
   let eventString;
   if (exam) {
     eventString = exam.name;
   } else {
-    eventString = "예정된 고사 없음";
+    eventString = "예정된 행사 없음";
   }
 
-  let dcounter;
+  let dcounter: number;
   if (exam) {
-    dcounter = `D - ${getDDay(exam.date)}`;
+    dcounter = getDDay(exam.date);
   } else {
-    dcounter = "0";
+    dcounter = 0;
   }
 
   const eventText = <p className="event-text">{eventString}</p>;
-  const counterText = <p className="d-counter">{"D - " + dcounter}</p>;
+
+  let counterText = <p className="d-counter">{"D-" + dcounter}</p>;
+  if (dcounter == 0) {
+    counterText = <p className="d-counter">D-DAY</p>;
+  }
   return (
     <>
+      {dateText}
       {eventText}
       {counterText}
     </>

@@ -1,8 +1,10 @@
 import DDayDisplay from "./components/DDayDisplay";
 import ListGroup from "./components/ListGroup";
 import { useMealData } from "./hooks/useMealData";
+import Footer from "./components/Footer";
 import { useState } from "react";
 import "./App.css";
+import TempDisplay from "./components/TempDisplay";
 
 function getCurrentYMD() {
   const now = new Date();
@@ -13,15 +15,20 @@ function getCurrentYMD() {
 }
 
 function App() {
-  const items = useMealData(getCurrentYMD());
+  const items = useMealData(getCurrentYMD(), 2);
   return (
     <>
+      <div className="bg-blur" />
       <div className="card-transparent food-div">
-        <ListGroup items={items} heading="급식표" />
+        <ListGroup items={items} heading="중식" />
       </div>
       <br />
       <div className="card-transparent d-counter-div">
         <DDayDisplay />
+        <TempDisplay />
+      </div>
+      <div className="footer-text">
+        <Footer />
       </div>
     </>
   );
