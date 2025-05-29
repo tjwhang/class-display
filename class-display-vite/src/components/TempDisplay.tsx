@@ -19,7 +19,7 @@ function useTemp() {
     };
 
     fetchTemp(); // 최초 1회 호출
-    const interval = setInterval(fetchTemp, 60 * 1000); // 1분마다 갱신
+    const interval = setInterval(fetchTemp, 600 * 1000); // 10분마다 갱신
 
     return () => clearInterval(interval);
   }, []);
