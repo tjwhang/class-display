@@ -8,13 +8,20 @@ function useTemp() {
   const [temp, setTemp] = useState<number | null>(null);
 
   useEffect(() => {
-    fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current_weather=true`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setTemp(data.current_weather?.temperature ?? null);
-      });
+    const fetchTemp = () => {
+      fetch(
+        `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current_weather=true`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setTemp(data.current_weather?.temperature ?? null);
+        });
+    };
+
+    fetchTemp(); // 최초 1회 호출
+    const interval = setInterval(fetchTemp, 60 * 1000); // 1분마다 갱신
+
+    return () => clearInterval(interval);
   }, []);
 
   return temp;
