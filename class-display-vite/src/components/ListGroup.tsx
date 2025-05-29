@@ -1,4 +1,4 @@
-import { useState, type MouseEventHandler } from "react";
+// import { useState, type MouseEventHandler } from "react";
 
 interface Props {
   items: string[];
@@ -15,7 +15,7 @@ function ListGroup(props: Props) {
       <h1>{props.heading}</h1>
       {noItemMessage}
       <ul className="list-ul">
-        {props.items.map((item, index) => (
+        {props.items.map((item) => (
           <li
             className={"list-item"}
             key={item}
