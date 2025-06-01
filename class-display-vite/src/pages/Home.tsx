@@ -1,41 +1,56 @@
-import DDayDisplay from "../components/DDayDisplay";
-import ListGroup from "../components/ListGroup";
-import CallDisplay from "../components/CallDisplay.tsx";
-import { useMealData } from "../hooks/useMealData";
-import Footer from "../components/Footer";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../App.css";
-import TempDisplay from "../components/TempDisplay";
-
-function getCurrentYMD() {
-	const now = new Date();
-	const yyyy = now.getFullYear();
-	const mm = String(now.getMonth() + 1).padStart(2, "0");
-	const dd = String(now.getDate()).padStart(2, "0");
-	return `${yyyy}${mm}${dd}`;
-}
+import Footer from "../components/Footer";
+import cahsLogo from "../assets/cahs.svg";
 
 function Home() {
-	const items = useMealData(getCurrentYMD(), 2);
+  const [classes, setClasses] = useState<string[]>([]);
+  const [selectedClass, setSelectedClass] = useState("");
+  const navigate = useNavigate();
 
-	return (
-		<>
-			<div className="bg-blur" />
-			<CallDisplay />
-			<div className="card-transparent food-div">
-				<ListGroup items={items} heading="중식" />
-			</div>
-			<br />
-			<div className="card-transparent d-counter-div">
-				<DDayDisplay />
-				<TempDisplay />
-			</div>
+  useEffect(() => {
+    fetch("/api/classes")
+      .then((res) => res.json())
+      .then((data) => setClasses(data.classes));
+  }, []);
 
-			<div className="footer-text">
-				<Footer />
-			</div>
-		</>
-	);
+  const handleGo = () => {
+    if (selectedClass) navigate(`/class/${selectedClass}`);
+  };
+
+  return (
+    <div className="class-select-page">
+      <div className="bg-blur" />
+      <img src={cahsLogo} alt="CAHS Logo" className="home-logo" />
+      <h2 className="class-select-title">반을 선택하세요</h2>
+      <div className="class-select-dropdown-wrap">
+        <select
+          className="class-select-dropdown"
+          value={selectedClass}
+          onChange={(e) => setSelectedClass(e.target.value)}
+          aria-label="반 선택"
+        >
+          <option value="">반 선택</option>
+          {classes.map((cls) => (
+            <option key={cls} value={cls}>
+              {cls}반
+            </option>
+          ))}
+        </select>
+        <button
+          className="class-select-btn"
+          onClick={handleGo}
+          disabled={!selectedClass}
+        >
+          이동
+        </button>
+      </div>
+      <div className="footer-text">
+        <Footer />
+      </div>
+    </div>
+  );
 }
 
 export default Home;

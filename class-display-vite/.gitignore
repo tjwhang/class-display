@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 .env
+
+class-display-server/data

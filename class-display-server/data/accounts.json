@@ -1,0 +1,17 @@
+{
+  "admin": {
+    "pw": "admin",
+    "class": "admin",
+    "name": "관리자"
+  },
+  "teacher27": {
+    "pw": "teacher27",
+    "class": "2-7",
+    "name": "정새온"
+  },
+  "teacher28": {
+    "pw": "teacher28",
+    "class": "2-8",
+    "name": "???"
+  }
+}
