@@ -24,6 +24,17 @@ body, #root {
   pointer-events: none;
 }
 
+.bg-admin {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #111 url('assets/cahs_bg.webp') center center / cover no-repeat;
+  filter: blur(8px) brightness(0.3);
+  pointer-events: none;
+}
+
 .logo {
   filter: drop-shadow(0 0 3vh #b33e3ec9);
   will-change: filter;
@@ -42,6 +53,20 @@ h1 {
   line-height: 1.0;
   
   margin-bottom: 3vh;
+}
+
+h1.admin-title {
+  position: absolute;
+  left: 4vh;
+  top: 4vh;
+}
+
+.admin-title {
+  color: #fff;
+  font-size: 3rem;
+  font-weight: 900;
+  margin: 2rem 0 1.5rem 2rem;
+  text-shadow: 0 2px 8px #222a;
 }
 
 ul {
@@ -170,4 +195,242 @@ li {
 .list-item:hover {
   background: rgba(255,255,255,0.08);
   color: #ffe;
+}
+
+.call-manager {
+  background: rgba(30, 30, 40, 0.85);
+  border-radius: 2rem;
+  box-shadow: 0 2px 16px #0005;
+  padding: 2.5rem 2rem 2rem 2rem;
+  max-width: 420px;
+  min-width: 320px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.submenu-title {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 8px #222a;
+}
+
+.input-format {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+
+.input-format label {
+  color: #fff;
+  font-weight: 600;
+  width: 3.5rem;
+  min-width: 3.5rem;
+  margin-right: 1rem;
+  text-align: right;
+}
+
+.input-format input {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  border-radius: 0.7rem;
+  border: none;
+  font-size: 1.1rem;
+  background: #23242a;
+  color: #fff;
+  outline: none;
+  box-shadow: 0 1px 4px #0002;
+  transition: background 0.2s;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-format input:focus {
+  background: #2e2f38;
+}
+
+button {
+  width: 100%;
+  padding: 0.9rem 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: #b33e3e;
+  color: #fff;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  box-shadow: 0 2px 8px #0003;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #ff1414;
+}
+
+.call-btn {
+  width: 100%;
+  padding: 0.9rem 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: #b33e3e;
+  color: #fff;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  box-shadow: 0 2px 8px #0003;
+  transition: background 0.2s;
+}
+
+.call-btn.success {
+  background: #1ed760;
+  color: #fff;
+}
+
+.clear-btn {
+  width: 100%;
+  padding: 0.9rem 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: #444;
+  color: #fff;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  box-shadow: 0 2px 8px #0003;
+  transition: background 0.2s;
+}
+
+.clear-btn.success {
+  background: #1ed760;
+  color: #fff;
+}
+
+.clear-btn:hover {
+  background: #888;
+}
+
+.call-text {
+  position: fixed;
+  top: 20;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  margin: 0 auto;
+  padding: 2vh 4vh;
+  background: rgba(255, 30, 30, 0.92);
+  color: #fff;
+  font-size: 11vh;
+  font-weight: 900;
+  border-radius: 0 0 2vh 2vh;
+  box-shadow: 0 4px 24px #b33e3e99, 0 1px 8px #0008;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 12px #a00, 0 1px 2px #000a;
+  max-width: 100vw;
+  min-height: 7vh;
+  transition: background 0.2s, box-shadow 0.2s, opacity 0.2s, visibility 0.2s;
+  opacity: 1;
+  visibility: visible;
+}
+
+.call-text.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  height: 0;
+  padding: 0;
+  min-height: 0;
+}
+
+/* StudentSelector styles */
+.student-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.student-selector select {
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 12px;
+  border-radius: 0.7rem;
+  border: none;
+  background: #23242a;
+  color: #fff;
+}
+
+.student-selector ul {
+  background: rgba(30,30,40,0.85);
+  border-radius: 12px;
+  padding: 12px;
+  min-height: 60px;
+  margin: 0;
+  max-width: 300px;
+  list-style: none;
+}
+
+.student-selector li {
+  color: #fff;
+  font-size: 1.1rem;
+  padding: 0.3rem 0;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.student-selector li:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.student-selector .no-student {
+  color: #aaa;
+  cursor: default;
+}
+
+/* Admin flex row for call-manager + 학생 리스트 */
+.admin-flex-row {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1100px;
+  margin: 5vh auto 0 5vw;
+  justify-content: flex-start;
+  position: static;
+  padding: 0;
+}
+
+.admin-flex-row > .call-manager {
+  flex: 1;
+  max-width: 420px;
+  min-width: 320px;
+  width: 100%;
+  box-sizing: border-box;
+  position: static;
+  left: unset;
+  top: unset;
+  margin: 6rem 0 0 0;
+}
+
+.admin-flex-row > .student-list-panel {
+  flex: 1;
+  min-width: 0;
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  margin: 6rem 0 0 0;
+}
+
+.clock-text {
+  font-size: 4vh;
+  margin-top: -2vh;
+  color: #fff;
+  text-shadow: 0 2px 8px #222a;
 }
