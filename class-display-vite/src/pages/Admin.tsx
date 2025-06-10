@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import Footer from "../components/Footer";
-import StudentSelector from "../components/StudentSelector";
 import LoginForm from "../components/LoginForm";
 import "../App.css";
+
+const StudentSelector = lazy(() => import("../components/StudentSelector"));
 
 const Admin: React.FC = () => {
   const [studentId, setStudentId] = useState("");
@@ -16,7 +17,6 @@ const Admin: React.FC = () => {
     classId: string;
     studentId: string;
   } | null>(null);
-  const [allClasses, setAllClasses] = useState<string[]>([]);
 
   useEffect(() => {
     fetch("/api/check-auth")
@@ -30,9 +30,6 @@ const Admin: React.FC = () => {
           setUserName(data.name);
         }
       });
-    fetch("/api/classes")
-      .then((res) => res.json())
-      .then((data) => setAllClasses(data.classes));
   }, []);
 
   if (authenticated === null)
@@ -52,25 +49,29 @@ const Admin: React.FC = () => {
         setClearSuccess(true);
         setTimeout(() => setClearSuccess(false), 800);
       }
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
-  const doCall = async (classId: string, studentId: string) => {
+  const doCall = async (classId: string, studentId: string, force = false) => {
     try {
       const response = await fetch("/api/call", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ classId, studentId }),
+        body: JSON.stringify({ classId, studentId, force }),
       });
       const data = await response.json();
-      if (data.warning) {
+      if (data.warning && !force) {
         setShowWarning(true);
         setPendingCall({ classId, studentId });
       } else if (data.success) {
         setCallSuccess(true);
         setTimeout(() => setCallSuccess(false), 800);
       }
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const handleCall = async () => {
@@ -79,14 +80,7 @@ const Admin: React.FC = () => {
 
   const handleWarningConfirm = async () => {
     if (pendingCall) {
-      // 강제 호출
-      await fetch("/api/call", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(pendingCall),
-      });
-      setCallSuccess(true);
-      setTimeout(() => setCallSuccess(false), 800);
+      await doCall(pendingCall.classId, pendingCall.studentId, true);
       setShowWarning(false);
       setPendingCall(null);
     }
@@ -168,12 +162,14 @@ const Admin: React.FC = () => {
             )}
           </div>
           <div className="student-list-panel">
-            <StudentSelector
-              onSelect={(cls, sid) => {
-                setUserClass(cls);
-                setStudentId(sid);
-              }}
-            />
+            <Suspense fallback={<div>Loading...</div>}>
+              <StudentSelector
+                onSelect={(cls, sid) => {
+                  setUserClass(cls);
+                  setStudentId(sid);
+                }}
+              />
+            </Suspense>
           </div>
         </div>
         <div className="footer-text">

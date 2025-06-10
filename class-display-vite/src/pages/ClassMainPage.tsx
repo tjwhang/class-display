@@ -1,11 +1,13 @@
 import { useParams } from "react-router-dom";
 import DDayDisplay from "../components/DDayDisplay";
 import ListGroup from "../components/ListGroup";
-import CallDisplay from "../components/CallDisplay";
 import { useMealData } from "../hooks/useMealData";
 import Footer from "../components/Footer";
-import TempDisplay from "../components/TempDisplay";
+import React, { lazy, Suspense } from "react";
 import "../App.css";
+
+const CallDisplay = lazy(() => import("../components/CallDisplay"));
+const TempDisplay = lazy(() => import("../components/TempDisplay"));
 
 function getCurrentYMD() {
   const now = new Date();
@@ -22,18 +24,22 @@ export default function ClassMainPage() {
   return (
     <>
       <div className="bg-blur" />
-      <CallDisplay />
       <div className="card-transparent food-div">
         <ListGroup items={items} heading="중식" />
       </div>
       <div className="card-transparent d-counter-div">
         <DDayDisplay />
-        <TempDisplay />
+        <Suspense fallback={<div>Loading components...</div>}>
+          <TempDisplay />
+        </Suspense>
       </div>
       <div className="footer-text">
         <Footer />
       </div>
       <div className="class-name-display">{classId}반</div>
+      <Suspense fallback={<div>Loading components...</div>}>
+        <CallDisplay />
+      </Suspense>
     </>
   );
 }

@@ -615,3 +615,120 @@ button:hover {
   box-shadow: none;
   font-weight: 600;
 }
+
+@media (max-width: 900px) {
+  .admin-flex-row {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: stretch;
+    margin: 2vh 0 0 0;
+    max-width: 100vw;
+    padding: 0 1vw;
+  }
+  .admin-flex-row > .call-manager,
+  .admin-flex-row > .student-list-panel {
+    margin: 2rem 0 0 0;
+    max-width: 100vw;
+    min-width: 0;
+    width: 100%;
+  }
+  .admin-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .admin-user-info.right {
+    margin-right: 0;
+    margin-left: 0;
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-title, h1.admin-title {
+    font-size: 2rem;
+    margin: 1rem 0 1rem 1rem;
+  }
+  .submenu-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .call-manager {
+    padding: 1.2rem 0.7rem 1rem 0.7rem;
+    min-width: 0;
+    max-width: 100vw;
+  }
+  .student-list-panel {
+    max-width: 100vw;
+    padding: 0.2rem 0.2rem 0.2rem 0.2rem;
+    font-size: 0.95rem;
+  }
+  .input-format label {
+    font-size: 1rem;
+    min-width: 2.5rem;
+    width: 2.5rem;
+    margin-right: 0.5rem;
+  }
+  .input-format input {
+    font-size: 1rem;
+    padding: 0.5rem 0.7rem;
+  }
+  .call-btn, .clear-btn, button {
+    font-size: 1rem;
+    padding: 0.6rem 0;
+    border-radius: 0.7rem;
+    margin-top: 0.7rem;
+  }
+  .admin-logout-btn {
+    font-size: 0.85rem;
+    padding: 0.15rem 0.7rem;
+  }
+  .footer-text {
+    font-size: 1.1rem;
+    right: 1vw;
+    bottom: 0.5vh;
+  }
+}
+
+@media (max-width: 600px) {
+  .call-text {
+    font-size: 5vw;
+    padding: 1vh 2vw;
+    min-height: 4vh;
+  }
+  .class-name-display {
+    font-size: 1.2rem;
+    margin-top: 0.7rem;
+  }
+  .home-logo {
+    width: 90px;
+    height: 90px;
+    margin: 2rem auto 1.2rem auto;
+  }
+  .class-select-title {
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+  }
+  .class-select-dropdown {
+    font-size: 1rem;
+    min-width: 80px;
+    max-width: 120px;
+    padding: 0.3rem 0.7rem;
+  }
+  .class-select-btn {
+    width: 80px;
+    font-size: 1rem;
+    padding: 0.3rem 0;
+    border-radius: 6px;
+  }
+}
+
+@media (max-width: 400px) {
+  .call-text {
+    font-size: 4vw;
+    padding: 0.5vh 1vw;
+  }
+  .footer-text {
+    font-size: 0.9rem;
+  }
+}

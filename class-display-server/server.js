@@ -31,7 +31,7 @@ wss.on("connection", (ws) => {
 
 // 호출 API
 app.post("/api/call", (req, res) => {
-  const { classId, studentId } = req.body;
+  const { classId, studentId, force } = req.body;
   const callerName = req.session?.name || "";
   const callerUser = req.session?.user || "";
 
@@ -62,6 +62,10 @@ app.post("/api/call", (req, res) => {
   // 세션의 class와 요청 classId가 다르면 경고 플래그 포함
   let warning = false;
   if (req.session.class !== classId) {
+    if (!force) {
+      // 경고만 보내고 실제 호출은 하지 않음
+      return res.json({ success: false, warning: true });
+    }
     warning = true;
   }
 
