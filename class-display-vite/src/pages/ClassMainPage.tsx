@@ -17,15 +17,42 @@ function getCurrentYMD() {
   return `${yyyy}${mm}${dd}`;
 }
 
+function getMealTypeByTime() {
+  const now = new Date();
+  return now.getHours() >= 13 ? 3 : 2;
+}
+function getMealTypeName(mealCode: number) {
+  return mealCode === 3 ? "석식" : "중식";
+}
+
 export default function ClassMainPage() {
   const { classId } = useParams();
-  const items = useMealData(getCurrentYMD(), 2);
+  const [mealType, setMealType] = React.useState(getMealTypeByTime());
+  const {
+    meals: items,
+    isLoading,
+    error,
+  } = useMealData(getCurrentYMD(), mealType);
+
+  // 1분마다 급식 종류 자동 전환
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      const newType = getMealTypeByTime();
+      if (newType !== mealType) setMealType(newType);
+    }, 60000);
+    return () => clearInterval(interval);
+  }, [mealType]);
 
   return (
     <>
       <div className="bg-blur" />
       <div className="card-transparent food-div">
-        <ListGroup items={items} heading="중식" />
+        <ListGroup
+          items={items}
+          heading={getMealTypeName(mealType)}
+          isLoading={isLoading}
+          error={error}
+        />
       </div>
       <div className="card-transparent d-counter-div">
         <DDayDisplay />
