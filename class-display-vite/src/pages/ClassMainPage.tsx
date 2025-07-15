@@ -7,6 +7,7 @@ import React, { lazy, Suspense } from "react";
 import "../App.css";
 
 const CallDisplay = lazy(() => import("../components/CallDisplay"));
+const MessageDisplay = lazy(() => import("../components/MessageDisplay"));
 const TempDisplay = lazy(() => import("../components/TempDisplay"));
 
 function getCurrentYMD() {
@@ -62,10 +63,10 @@ export default function ClassMainPage() {
       </div>
       <div className="footer-text">
         <Footer />
-      </div>
-      <div className="class-name-display">{classId}반</div>
+      </div>      <div className="class-name-display">{classId}반</div>
       <Suspense fallback={<div>Loading components...</div>}>
         <CallDisplay />
+        <MessageDisplay />
       </Suspense>
     </>
   );
