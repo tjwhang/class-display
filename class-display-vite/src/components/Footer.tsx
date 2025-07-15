@@ -22,7 +22,7 @@ const Footer: React.FC = () => (
       target="_blank"
       rel="noopener noreferrer"
     >
-      tjwhang
+      Github Repo
     </a>{" "}
     | NEIS OpenAPI 사용
   </footer>
