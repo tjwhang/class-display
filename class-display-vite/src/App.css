@@ -301,6 +301,75 @@ li {
   color: #fff;
 }
 
+.input-format textarea {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  border-radius: 0.7rem;
+  border: none;
+  font-size: 1.1rem;
+  background: #23242a;
+  color: #fff;
+  outline: none;
+  box-shadow: 0 1px 4px #0002;
+  transition: background 0.2s;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+}
+
+.input-format textarea:focus {
+  background: #2e2f38;
+}
+
+.input-format textarea {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  border-radius: 0.7rem;
+  border: none;
+  font-size: 1.1rem;
+  background: #23242a;
+  color: #fff;
+  outline: none;
+  box-shadow: 0 1px 4px #0002;
+  transition: background 0.2s;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+}
+
+.input-format textarea:focus {
+  background: #2e2f38;
+}
+
+.input-format textarea {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  border-radius: 0.7rem;
+  border: none;
+  font-size: 1.1rem;
+  background: #23242a;
+  color: #fff;
+  outline: none;
+  box-shadow: 0 1px 4px #0002;
+  transition: background 0.2s;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+}
+
+.input-format textarea:focus {
+  background: #2e2f38;
+}
+
 button {
   width: 100%;
   padding: 0.9rem 0;
@@ -448,10 +517,15 @@ button:hover {
   align-items: flex-start;
   width: 100%;
   max-width: 1100px;
-  margin: 5vh auto 0 5vw;
+  margin: 2vh auto 0 5vw;
   justify-content: flex-start;
   position: static;
   padding: 0;
+}
+
+/* 긴 메시지 섹션과 위 행 사이의 간격 줄이기 */
+.admin-flex-row + .admin-flex-row {
+  margin-top: 1vh;
 }
 
 .admin-flex-row > .call-manager {
@@ -716,11 +790,10 @@ button:hover {
   letter-spacing: 0.05em;
   max-width: 100vw;
   min-height: 10vh;
-  transition: all 0.3s ease-in-out;
-  opacity: 1;
+  transition: all 0.3s ease-in-out;  opacity: 1;
   visibility: visible;
-  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 
 .message-content {
@@ -748,27 +821,119 @@ button:hover {
   min-height: 0;
 }
 
+/* 긴 메시지 스타일 */
+.long-message-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.85);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4vh 2vw;
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.3s ease-in-out;
+}
+
+.long-message-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.long-message-container {
+  background: rgba(30, 144, 255, 0.95);
+  color: #fff;
+  border-radius: 2vh;
+  padding: 3vh 4vw;
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(30, 144, 255, 0.5);
+  text-align: center;
+  position: relative;
+}
+
+.long-message-content {
+  font-size: 4vh;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 2vh;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  text-shadow: 0 2px 8px #006;
+}
+
+.long-message-sender {
+  font-size: 2.5vh;
+  font-weight: 600;
+  opacity: 0.9;
+  text-shadow: 0 1px 4px #004;
+  margin-bottom: 1vh;
+}
+
+.long-message-close {
+  position: absolute;
+  top: 1vh;
+  right: 2vh;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #fff;
+  font-size: 2vh;
+  width: 4vh;
+  height: 4vh;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.long-message-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
 /* 모바일 대응 */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .admin-flex-row {
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     align-items: stretch;
-    margin: 2vh 0 0 0;
+    margin: 1vh 0 0 0;
     max-width: 100vw;
-    padding: 0 1vw;
+    padding: 0 2vw;
   }
-  .admin-flex-row > .call-manager,
-  .admin-flex-row > .student-list-panel {
-    margin: 2rem 0 0 0;
+  
+  /* 모바일에서도 긴 메시지 섹션과 위 행 사이의 간격 줄이기 */
+  .admin-flex-row + .admin-flex-row {
+    margin-top: 0.5vh;
+  }
+  .admin-flex-row > .call-manager {
+    margin: 1rem 0 0 0;
     max-width: 100vw;
     min-width: 0;
     width: 100%;
+    padding: 1rem;
+  }
+  .admin-flex-row > .student-list-panel {
+    margin: 1rem 0 0 0;
+    max-width: 100vw;
+    min-width: 0;
+    width: 100%;
+    max-height: 300px;
   }
   .admin-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
+    padding: 0 2vw;
   }
   .admin-user-info.right {
     margin-right: 0;
@@ -791,61 +956,110 @@ button:hover {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .admin-title, h1.admin-title {
-    font-size: 2rem;
-    margin: 1rem 0 1rem 1rem;
+    font-size: 1.8rem;
+    margin: 1rem 0 1rem 2vw;
+    position: static;
+    left: auto;
+    top: auto;
   }
   .submenu-title {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-bottom: 1rem;
   }
   .call-manager {
-    padding: 1.2rem 0.7rem 1rem 0.7rem;
+    padding: 1rem;
     min-width: 0;
     max-width: 100vw;
+    border-radius: 1rem;
   }
   .student-list-panel {
     max-width: 100vw;
-    padding: 0.2rem 0.2rem 0.2rem 0.2rem;
-    font-size: 0.95rem;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+  .input-format {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.3rem;
+    margin-bottom: 1rem;
   }
   .input-format label {
+    font-size: 0.9rem;
+    min-width: auto;
+    width: auto;
+    margin-right: 0;
+    text-align: left;
+    font-weight: 600;
+  }  .input-format input,
+  .input-format select,
+  .input-format textarea {
     font-size: 1rem;
-    min-width: 2.5rem;
-    width: 2.5rem;
-    margin-right: 0.5rem;
-  }
-  .input-format input {
-    font-size: 1rem;
-    padding: 0.5rem 0.7rem;
-  }
-  .input-format select {
-    font-size: 1rem;
-    padding: 0.5rem 0.7rem;
+    padding: 0.7rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
   }
   .call-btn, .clear-btn, button {
     font-size: 1rem;
-    padding: 0.6rem 0;
-    border-radius: 0.7rem;
-    margin-top: 0.7rem;
+    padding: 0.8rem 0;
+    border-radius: 0.8rem;
+    margin-top: 0.5rem;
   }
   .admin-logout-btn {
     font-size: 0.85rem;
-    padding: 0.15rem 0.7rem;
+    padding: 0.4rem 1rem;
   }
   .footer-text {
-    font-size: 1.1rem;
-    right: 1vw;
-    bottom: 0.5vh;
+    font-size: 1rem;
+    right: 2vw;
+    bottom: 1vh;
+    padding: 1rem 0;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .call-text {
     font-size: 5vw;
     padding: 1vh 2vw;
     min-height: 4vh;
+  }
+  .message-text {
+    font-size: 4.5vw;
+    padding: 1.5vh 2vw;
+    min-height: 6vh;
+  }
+  .message-content {
+    font-size: 5vh;
+    margin-bottom: 0.5vh;
+  }
+  .message-sender {
+    font-size: 2.5vh;
+  }
+  .long-message-overlay {
+    padding: 2vh 4vw;
+  }
+  .long-message-container {
+    max-width: 95vw;
+    max-height: 85vh;
+    padding: 2vh 3vw;
+    border-radius: 1vh;
+  }
+  .long-message-content {
+    font-size: 3vh;
+    line-height: 1.4;
+    margin-bottom: 1.5vh;
+  }
+  .long-message-sender {
+    font-size: 2vh;
+  }
+  .long-message-close {
+    top: 0.5vh;
+    right: 1vh;
+    font-size: 1.5vh;
+    width: 3vh;
+    height: 3vh;
   }
   .class-name-display {
     font-size: 1.2rem;

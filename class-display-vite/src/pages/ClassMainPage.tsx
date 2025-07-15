@@ -8,6 +8,7 @@ import "../App.css";
 
 const CallDisplay = lazy(() => import("../components/CallDisplay"));
 const MessageDisplay = lazy(() => import("../components/MessageDisplay"));
+const LongMessageDisplay = lazy(() => import("../components/LongMessageDisplay"));
 const TempDisplay = lazy(() => import("../components/TempDisplay"));
 
 function getCurrentYMD() {
@@ -67,6 +68,7 @@ export default function ClassMainPage() {
       <Suspense fallback={<div>Loading components...</div>}>
         <CallDisplay />
         <MessageDisplay />
+        <LongMessageDisplay />
       </Suspense>
     </>
   );

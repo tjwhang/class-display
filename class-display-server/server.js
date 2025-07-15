@@ -57,9 +57,7 @@ app.post("/api/call", (req, res) => {
     });
     sockets.forEach((ws) => ws.send(message));
     return res.json({ success: true, warning: false });
-  }
-
-  // 세션의 class와 요청 classId가 다르면 경고 플래그 포함
+  }  // 세션의 class와 요청 classId가 다르면 경고 플래그 포함
   let warning = false;
   if (req.session.class !== classId) {
     if (!force) {
@@ -148,9 +146,7 @@ app.post("/api/message", (req, res) => {
     });
     sockets.forEach((ws) => ws.send(message));
     return res.json({ success: true, warning: false });
-  }
-
-  // 세션의 class와 요청 classId가 다르면 경고 플래그 포함
+  }  // 세션의 class와 요청 classId가 다르면 경고 플래그 포함
   let warning = false;
   if (req.session.class !== classId) {
     if (!force) {
@@ -162,6 +158,47 @@ app.post("/api/message", (req, res) => {
 
   const message = JSON.stringify({
     type: "SEND_MESSAGE",
+    payload: { messageText, sender: senderName, classId }
+  });
+  sockets.forEach((ws) => ws.send(message));
+  res.json({ success: true, warning });
+});
+
+// 긴 메시지 API
+app.post("/api/long-message", (req, res) => {
+  const { classId, messageText, force } = req.body;
+  const senderName = req.session?.name || "";
+  const senderUser = req.session?.user || "";
+
+  // 긴 메시지 해제: 빈 값이면 모든 클라이언트에 CLEAR_LONG_MESSAGE 전송
+  if (!classId && !messageText) {
+    const message = JSON.stringify({ type: "CLEAR_LONG_MESSAGE" });
+    sockets.forEach((ws) => ws.send(message));
+    return res.json({ success: true });
+  }
+
+  // 관리자(admin)는 모든 반에 긴 메시지 전송 가능, 경고 없음, 전체 broadcast
+  if (req.session.class === "admin") {
+    const message = JSON.stringify({
+      type: "SEND_LONG_MESSAGE",
+      payload: { messageText, sender: senderName, classId: "ALL" }
+    });
+    sockets.forEach((ws) => ws.send(message));
+    return res.json({ success: true, warning: false });
+  }
+
+  // 세션의 class와 요청 classId가 다르면 경고 플래그 포함
+  let warning = false;
+  if (req.session.class !== classId) {
+    if (!force) {
+      // 경고만 보내고 실제 긴 메시지 전송은 하지 않음
+      return res.json({ success: false, warning: true });
+    }
+    warning = true;
+  }
+
+  const message = JSON.stringify({
+    type: "SEND_LONG_MESSAGE",
     payload: { messageText, sender: senderName, classId }
   });
   sockets.forEach((ws) => ws.send(message));
